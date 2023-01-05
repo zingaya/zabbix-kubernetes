@@ -1,6 +1,20 @@
-# Zabbix + Kubernetes
+# Zabbix + Kubernetes (Minikube)
+Tested on:
+```
+Proxmox 7.3
+└-Pfsense 2.6
+└-Zabbix 6.2
+└-Debian 11
+  └-Docker + minikube
+```
 
-# Prepare SSL certificates
+## Prepare SSL certificates
+Create a self signed certificate
+\# openssl genrsa -aes256 -out domain.key 2048\
+\# openssl req -key domain.key -new -out domain.csr\
+\# openssl x509 -signkey domain.key -in domain.csr -req -days 365 -out domain.crt
+
+Copy the certificate to minikube
 \# mkdir -p $HOME/.minikube/certs\
 \# cp domain.pem $HOME/.minikube/certs/domain.pem\
 \# minikube start --embed-certs
